@@ -1,0 +1,57 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - ${LOG_PATH:/var/log/summerschool}/application.log
+    - ${LOG_PATH:/var/log/summerschool}/application-json.log
+  fields:
+    type: application
+  fields_under_root: true
+  json:
+    keys_under_root: true
+    message_key: message
+    add_error_key: true
+    overwrite_keys: true
+
+output.elasticsearch:
+  hosts: ["${ELK_ELASTICSEARCH_URL}"]
+  protocol: "https"
+  username: "${ELK_USERNAME:elastic}"
+  password: "${ELK_PASSWORD}"
+  ssl.certificate_authorities: ["${ELK_CA_PATH:/etc/filebeat/certs/ca.crt}"]
+  indices:
+    - index: "summerschool-application-%{+yyyy.MM.dd}"
+      when.equals:
+        type: "application"
+
+setup.kibana:
+  host: "${ELK_KIBANA_URL}"
+  protocol: "https"
+  username: "${ELK_USERNAME:elastic}"
+  password: "${ELK_PASSWORD}"
+  ssl.certificate_authorities: ["${ELK_CA_PATH:/etc/filebeat/certs/ca.crt}"]
+
+setup.ilm.enabled: auto
+setup.ilm.rollover_alias: "summerschool-application"
+setup.ilm.pattern: "{now/d}-000001"
+setup.template.name: "summerschool-application"
+setup.template.pattern: "summerschool-application-*"
+
+logging.level: info
+logging.to_files: true
+logging.files:
+  path: ${LOG_PATH:/var/log/summerschool}/filebeat
+  name: filebeat
+  keepfiles: 7
+  permissions: 0644
+
+processors:
+  - add_host_metadata: ~
+  - add_cloud_metadata: ~
+  - add_docker_metadata: ~
+  - add_kubernetes_metadata: ~
+  - add_fields:
+      target: ''
+      fields:
+        environment: production
+        application: summerschool
