@@ -27,4 +27,13 @@ public class Judge0Client {
                 .retrieve()
                 .body(String.class);
     }
+
+    public String getSubmission(String token) {
+        String uri = String.format("/submissions/%s?base64_encoded=true&fields=*", token);
+        return this.restClient.get()
+                .uri(uri)
+                .retrieve()
+                .body(String.class);
+
+    }
 }
