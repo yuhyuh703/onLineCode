@@ -22,7 +22,7 @@ public class Judge0Client {
         String encodedSourceCode = Base64.getEncoder().encodeToString(sourceCode.getBytes());
         String encodedStdIn = Base64.getEncoder().encodeToString(stdIn.getBytes());
         String body = String.format("""
-                        {"language_id":%03d,
+                        {"language_id":%d,
                         "source_code":"%s",
                         "stdin":"%s"}
                         """, lanID, encodedSourceCode, encodedStdIn);
