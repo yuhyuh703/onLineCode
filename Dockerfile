@@ -6,7 +6,7 @@ RUN apt-get update
 RUN apt-get install -y maven
 RUN apt-get install -y wget
 
-COPY files /app
+COPY . /app
 RUN cd app && mvn clean package -DskipTests
 
-ENTRYPOINT java -jar -Dspring.profiles.active=prod /app/target/summerschool-0.0.1-SNAPSHOT.jar
+ENTRYPOINT java -jar -Dspring.profiles.active=prod /app/target/onLineCode-0.0.1-SNAPSHOT.jar
