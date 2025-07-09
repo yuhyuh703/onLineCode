@@ -17,7 +17,15 @@ public class TestController {
     @GetMapping("/test-submission")
     public String testSubmission() {
 
-        return judge0Client.createSubmission();
+        return judge0Client.createSubmission(52, """
+                #include <stdio.h>
+                
+                int main(void) {
+                  char name[10];
+                  scanf("%s", name);
+                  printf("hello, %s\\n", name);
+                  return 0;
+                }""", "matic");
     }
 
     @GetMapping("/token/{token}")

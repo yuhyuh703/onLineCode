@@ -3,6 +3,8 @@ package com.example.onLineCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
+import java.util.Base64;
+
 @Service
 public class Judge0Client {
     private final RestClient restClient;
@@ -16,14 +18,17 @@ public class Judge0Client {
                 .build();
     }
 
-    public String createSubmission()  {
+    public String createSubmission(Integer lanID, String sourceCode, String stdIn)  {
+        String encodedSourceCode = Base64.getEncoder().encodeToString(sourceCode.getBytes());
+        String encodedStdIn = Base64.getEncoder().encodeToString(stdIn.getBytes());
+        String body = String.format("""
+                        {"language_id":%03d,
+                        "source_code":"%s",
+                        "stdin":"%s"}
+                        """, lanID, encodedSourceCode, encodedStdIn);
         return this.restClient.post()
                 .uri("/submissions?base64_encoded=true&wait=false&fields=*")
-                .body("""
-                        {"language_id":52,
-                        "source_code":"I2luY2x1ZGUgPHN0ZGlvLmg+CgppbnQgbWFpbih2b2lkKSB7CiAgY2hhciBuYW1lWzEwXTsKICBzY2FuZigiJXMiLCBuYW1lKTsKICBwcmludGYoImhlbGxvLCAlc1xuIiwgbmFtZSk7CiAgcmV0dXJuIDA7Cn0=",
-                        "stdin":"SnVkZ2Uw"}
-                        """)
+                .body(body)
                 .retrieve()
                 .body(String.class);
     }
