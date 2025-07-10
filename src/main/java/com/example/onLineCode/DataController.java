@@ -11,9 +11,16 @@ import java.util.Map;
 public class DataController {
 
     @PostMapping("/data")
-    public ResponseEntity<String> receiveData(@RequestBody Map<String, String> payload) {
+    public ResponseEntity<Map<String, String>> receiveData(@RequestBody Map<String, String> payload) {
         String input = payload.get("input");
         System.out.println("Received input: " + input);
-        return ResponseEntity.ok("Received: " + input);
+
+        Map<String, String> response = Map.of(
+                "status", "success",
+                "received", input
+        );
+
+        return ResponseEntity.ok(response);
     }
+
 }

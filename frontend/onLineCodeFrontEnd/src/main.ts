@@ -4,10 +4,11 @@ import { importProvidersFrom } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideHttpClient } from '@angular/common/http';   // Angular 17+
 import { App } from './app/app';
+import 'zone.js';
 
 bootstrapApplication(App, {
   providers: [
-    importProvidersFrom(FormsModule),   // ✅ makes ngModel available app‑wide
+    importProvidersFrom(FormsModule),
     provideHttpClient(),                // HTTP client for your POST call
   ],
 }).catch(err => console.error(err));
