@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
 
 interface ResponseType{
   received: string,
@@ -9,12 +10,14 @@ interface ResponseType{
 
 @Component({
   selector: 'app-code-input',
-  imports: [],
+  imports: [
+    FormsModule
+  ],
   templateUrl: './code-input.html',
   styleUrl: './code-input.less'
 })
 export class CodeInput {
-  userInput: string = "asd"
+  userInput: string = ""
   feedback: string = ""
   constructor(private http: HttpClient) {
 
