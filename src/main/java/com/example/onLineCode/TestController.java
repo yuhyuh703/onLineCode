@@ -1,11 +1,9 @@
 package com.example.onLineCode;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class TestController {
 
     private final Judge0Client judge0Client;
@@ -14,7 +12,7 @@ public class TestController {
         this.judge0Client = judge0Client;
     }
 
-    @GetMapping("/test-submission")
+    @GetMapping("/submission")
     public String testSubmission() {
 
         return judge0Client.createSubmission(52, """
