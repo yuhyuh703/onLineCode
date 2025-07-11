@@ -17,7 +17,7 @@ public class Judge0Client {
     public Judge0Client(RestClient.Builder restClientBuilder) {
         this.restClient = restClientBuilder
                 .baseUrl("https://judge0-ce.p.rapidapi.com")
-                .defaultHeader("x-rapidapi-key", "d17330c6damsh518d79d417c23d7p1cc1c3jsn902f9c957c9a")
+                .defaultHeader("x-rapidapi-key", "3a3119698emsh2509fd805d8c517p166bb6jsnee42304d29e6")
                 .defaultHeader("x-rapidapi-host", "judge0-ce.p.rapidapi.com")
                 .defaultHeader("Content-Type", "application/json")
                 .build();
