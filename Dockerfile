@@ -9,4 +9,4 @@ RUN apt-get install -y wget
 COPY . /app
 RUN cd app && mvn clean package -DskipTests
 
-ENTRYPOINT java -jar -Dspring.profiles.active=prod /app/target/onLineCode-0.0.1-SNAPSHOT.jar
+ENTRYPOINT java -jar -Dspring.profiles.active=production /app/target/onLineCode-0.0.1-SNAPSHOT.jar
