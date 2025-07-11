@@ -4,7 +4,6 @@ package com.example.onLineCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
-import com.example.onLineCode.Judge0Client;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Base64;
@@ -31,6 +30,7 @@ public class DataController {
         byte[] decodedSource = Base64.getDecoder().decode(sourceCode);
         byte[] decodedStdin = Base64.getDecoder().decode(stdin);
         String token = judge0Client.createSubmission(languageId, new String(decodedSource), new String(decodedStdin));
+        System.out.println("got token");
         try {Thread.sleep(5000);} catch (InterruptedException e) {}
         String judge0Response = judge0Client.getSubmission(token);
         String decodedStdout = "";

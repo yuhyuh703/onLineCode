@@ -1,14 +1,11 @@
 package com.example.onLineCode;
 
-import aj.org.objectweb.asm.TypeReference;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Base64;
-import java.util.Map;
 
 @Service
 public class Judge0Client {
