@@ -22,7 +22,7 @@ jobs:
         with:
           appSourcePath: ${{ github.workspace }}
           acrName: zemregistry
-          containerAppName: {onlinecode}
+          containerAppName: onLineCode
           registryUsername: zemregistry
           registryPassword: ${{ secrets.REGISTRY_PASSWORD }}
           resourceGroup: teads-sess-2025
