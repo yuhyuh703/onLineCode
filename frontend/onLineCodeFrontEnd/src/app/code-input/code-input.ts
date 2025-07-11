@@ -109,7 +109,7 @@ export class CodeInput {
       stdin: base64Stdin
     };
     this.feedback = 'Running...';
-    this.http.post<any>('http://localhost:8080/api/data', payload)
+    this.http.post<any>('https://onlinecode.greenisland-0015b907.westeurope.azurecontainerapps.io/api/data', payload)
       .subscribe({
         next: (response) => {
           if (response && typeof response.stdout !== 'undefined') {
